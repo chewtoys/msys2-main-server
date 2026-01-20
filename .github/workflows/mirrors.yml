@@ -1,4 +1,4 @@
-name: 'server'
+name: 'mirrors'
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     - cron: '0 4 * * *'
 
 jobs:
-  server:
+  mirrors:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -15,8 +15,8 @@ jobs:
       - name: Install deps
         run: |
           sudo apt-get update
-          sudo apt-get install -y rsync python3 ca-certificates faketime
+          sudo apt-get install -y python3 ca-certificates
 
-      - name: Test server
+      - name: Test mirrors
         run: |
-          faketime -f "+7d" python3 -m unittest tests/test_server.py
+          python3 -m unittest tests/test_mirrors.py
