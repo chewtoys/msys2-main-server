@@ -5,12 +5,17 @@ on:
   schedule:
     - cron: '0 4 * * *'
 
+permissions:
+  contents: read
+
 jobs:
   mirrors:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Install deps
         run: |
