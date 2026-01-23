@@ -78,6 +78,7 @@ chmod go-rwx -R /home/repo
 # logging config
 mkdir /etc/systemd/journald.conf.d/
 echo "[Journal]
+Storage=persistent
 MaxFileSec=1day
 MaxRetentionSec=2week
 RateLimitIntervalSec=0
