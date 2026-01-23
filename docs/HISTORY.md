@@ -84,8 +84,9 @@ RateLimitIntervalSec=0
 RateLimitBurst=0
 SystemMaxUse=20G
 SystemMaxFileSize=1G
-ForwardToSyslog=no" > /etc/systemd/journald.conf.d/msys2.conf
+ForwardToSyslog=no" > /etc/systemd/journald.conf.d/zzz-msys2.conf
 systemctl force-reload systemd-journald
+# Confirm with "systemd-analyze cat-config systemd/journald.conf"
 
 # use journald for docker logging
 echo '{"log-driver": "journald"}' > /etc/docker/daemon.json
