@@ -62,3 +62,6 @@ mirrorbits add -http=https://ca.mirrors.cicku.me/msys2/ -rsync=rsync://us.dyi.ng
 KEY="Latitude" VALUE="45.4994" EDITOR=mirrorbits-edit-helper mirrorbits edit ca.mirrors.cicku.me
 KEY="Longitude" VALUE="-73.5703" EDITOR=mirrorbits-edit-helper mirrorbits edit ca.mirrors.cicku.me
 mirrorbits enable ca.mirrors.cicku.me
+
+mirrorbits add -http=https://mirrors.qlu.edu.cn/msys2/ -rsync=rsync://mirrors.qlu.edu.cn/msys2/ mirrors.qlu.edu.cn
+mirrorbits enable mirrors.qlu.edu.cn
