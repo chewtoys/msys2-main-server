@@ -8,7 +8,7 @@ RUN \
         apache2 \
         composer \
         curl \
-        libapache2-mod-php8.3 \
+        libapache2-mod-php \
         patchutils \
         unzip \
         vnstat \
