@@ -69,7 +69,7 @@ It provides the following services:
 * http://repo.localhost:9090/
 * http://repo.localhost:9090/staging/
 * http://mirror.localhost:9090/?mirrorstats
-* http://packages.localhost
+* http://packages.localhost:9090
 * rsync://localhost/builds
 
 Run it with `docker compose -f docker-compose.dev.yml ...`. For example
