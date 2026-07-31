@@ -164,6 +164,9 @@ services:
       - ALL
     cap_add:
       - NET_BIND_SERVICE
+      - CHOWN
+      - SETGID
+      - SETUID
     networks:
       - redir
     labels:
@@ -194,6 +197,9 @@ services:
       - ALL
     cap_add:
       - NET_BIND_SERVICE
+      - CHOWN
+      - SETGID
+      - SETUID
     networks:
       - mingw-w64-redir
     labels:
@@ -224,6 +230,9 @@ services:
       - ALL
     cap_add:
       - NET_BIND_SERVICE
+      - CHOWN
+      - SETGID
+      - SETUID
     networks:
       - repo
     volumes:
@@ -276,6 +285,9 @@ services:
       - ALL
     cap_add:
       - NET_BIND_SERVICE
+      - CHOWN
+      - SETGID
+      - SETUID
     networks:
       - stagingrepo
     volumes:
