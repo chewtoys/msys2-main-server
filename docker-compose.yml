@@ -8,6 +8,10 @@ services:
   docker-socket-proxy:
     image: tecnativa/docker-socket-proxy:v0.5.0
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     environment:
       - CONTAINERS=1
     volumes:
@@ -18,6 +22,12 @@ services:
 
   traefik:
     image: traefik:v3.7
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
     depends_on:
       - docker-socket-proxy
     command:
@@ -80,6 +90,12 @@ services:
   stats:
     build: ./services/stats
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
     networks:
       - stats
     labels:
@@ -109,6 +125,12 @@ services:
   packages:
     image: ghcr.io/msys2/msys2-web:latest
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
     networks:
       - packages
     labels:
@@ -134,6 +156,12 @@ services:
   redir:
     image: nginx:1.30
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
     networks:
       - redir
     labels:
@@ -158,6 +186,12 @@ services:
   mingw-w64-redir:
     image: nginx:1.30
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
     networks:
       - mingw-w64-redir
     labels:
@@ -182,6 +216,12 @@ services:
   repo:
     image: nginx:1.30
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
     networks:
       - repo
     volumes:
@@ -212,6 +252,10 @@ services:
   staging:
     build: ./services/staging/
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     networks:
       - staging
     volumes:
@@ -224,6 +268,12 @@ services:
   stagingrepo:
     image: nginx:1.30
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
     networks:
       - stagingrepo
     volumes:
@@ -253,6 +303,12 @@ services:
   rsync:
     build: ./services/rsync/
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
     volumes:
       - /srv/msys2repo/:/rsync-volume/:ro
       - ./services/rsync/rsyncd.conf:/etc/rsyncd.conf:ro
@@ -273,8 +329,13 @@ services:
 
   valkey:
     image: valkey/valkey:9.1
+    user: "999:999"
     restart: unless-stopped
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     networks:
       - mirrorbits-valkey
     environment:
@@ -286,6 +347,10 @@ services:
     image: ghcr.io/maxmind/geoipupdate:v7.1
     restart: unless-stopped
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     networks:
       - geoipupdate
     env_file:
@@ -302,6 +367,10 @@ services:
     restart: unless-stopped
     network_mode: "none"
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     volumes:
       - /srv/msys2repo:/repo-volume
 
@@ -309,6 +378,12 @@ services:
     build: ./services/mirrorbits
     restart: unless-stopped
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
     depends_on:
       - valkey
       - geoipupdate
@@ -344,6 +419,12 @@ services:
     image: ghcr.io/msys2/msys2-autobuild-controller:latest
     restart: unless-stopped
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
     volumes:
       - ./services/autobuild-controller:/app/instance:ro
     labels:
@@ -367,6 +448,10 @@ services:
     image: 42wim/matterbridge:1
     restart: unless-stopped
     logging: *default-logging
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     networks:
       - imbridge
     env_file:
