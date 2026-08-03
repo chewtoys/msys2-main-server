@@ -265,6 +265,10 @@ services:
       - no-new-privileges:true
     cap_drop:
       - ALL
+    cap_add:
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
     volumes:
       - ./devrepo:/repo-volume
 
